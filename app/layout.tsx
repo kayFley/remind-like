@@ -5,6 +5,8 @@ import { ClerkProvider } from '@clerk/nextjs'
 import { Separator } from '@/components/ui/separator'
 import NavBar from '@/components/NavBar'
 import { dark } from '@clerk/themes'
+import { ThemeProvider } from '@/providers/ThemeProvider'
+import { cn } from '@/lib/utils'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,13 +22,17 @@ export default function RootLayout({
 }>) {
 	return (
 		<ClerkProvider appearance={dark}>
-			<html lang='en'>
-				<body className={inter.className}>
-					<div className='flex min-h-screen w-full flex-col items-center bg-neutral-800'>
-						<NavBar />
-						<Separator className='opacity-0' />
-						{children}
-					</div>
+			<html lang='en' className={cn(inter.className)}>
+				<body>
+					<ThemeProvider>
+						<div className='flex min-h-screen w-full flex-col items-center bg-neutral-50 dark:bg-black'>
+							<NavBar />
+							<Separator className='' />
+							<main className='flex flex-grow w-full justify-center bg-white dark:bg-neutral-950'>
+								{children}
+							</main>
+						</div>
+					</ThemeProvider>
 				</body>
 			</html>
 		</ClerkProvider>
