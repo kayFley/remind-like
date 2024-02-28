@@ -22,7 +22,7 @@ export default async function Home() {
 
 async function WelcomeMsg() {
 	const user = await currentUser()
-	await wait(2000)
+	await wait(1000)
 
 	if (!user) {
 		return <div>error</div>
